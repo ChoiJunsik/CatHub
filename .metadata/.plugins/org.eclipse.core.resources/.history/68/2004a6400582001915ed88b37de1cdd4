@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+import javax.net.ssl.SSLSocket;
+
+public class ServerSend extends Thread{
+	SSLSocket socket;
+	public ServerSend(SSLSocket socket) {
+		this.socket = socket;
+	}
+	@Override
+	public void run() {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			PrintWriter writer = new PrintWriter(socket.getOutputStream());
+			while(true) {
+				String str = reader.readLine();
+				if(str.equals("exit"))
+					break;//입력값이 bye면 클라이언트 종료
+				writer.println(str);//bye가 아니면 메세지 전송
+				writer.flush();//버퍼내의 데이타 밀어내기
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				socket.close();//클라이언트 종료시는 반드시 소켓 해제
+			}catch(Exception e) {}
+		}
+	}
+}

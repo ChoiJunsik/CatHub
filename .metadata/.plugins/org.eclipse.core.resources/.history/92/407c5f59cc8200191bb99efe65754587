@@ -1,0 +1,3 @@
+public interface RmiOp extends java.rmi.Remote{
+	public String getLsResult() throws java.rmi.RemoteException;
+}

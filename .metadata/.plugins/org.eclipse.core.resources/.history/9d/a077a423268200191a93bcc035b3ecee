@@ -1,0 +1,25 @@
+import java.io.File;
+
+public class test {
+
+	public static void main(String[] args) {
+	    String path = System.getProperty("user.home") + "\\Desktop\\catHubServer";
+
+		String output ="";
+		File dirFile=new File(path);
+		File []fileList=dirFile.listFiles();
+		for(File tempFile : fileList) {
+		  if(tempFile.isFile()) {
+		    String tempPath=tempFile.getParent();
+		    String tempFileName=tempFile.getName();
+		    output += tempPath+"\\"+tempFileName+"\n";
+		    
+		  }
+		}
+		if(output == "")
+			System.out.println("hi");
+	  }
+	
+	
+
+}

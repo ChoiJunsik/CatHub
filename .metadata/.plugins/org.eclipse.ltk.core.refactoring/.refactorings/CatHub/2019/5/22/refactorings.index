@@ -1,0 +1,14 @@
+1559107537787	Delete elements
+1559113352822	Delete element
+1559113552820	Delete element
+1559128845929	Rename type 'SendThread'
+1559128885096	Rename type 'ReceiveThread'
+1559214707769	Delete element
+1559214715654	Delete element
+1559214830215	Rename type 'Hello'
+1559214843989	Rename type 'rmi'
+1559214864090	Rename type 'HelloImpl'
+1559214924543	Rename method 'sayHello'
+1559280437521	Rename method 'getLsResult'
+1559285512213	Rename local variable 'f'
+1559285546701	Rename local variable 'c'

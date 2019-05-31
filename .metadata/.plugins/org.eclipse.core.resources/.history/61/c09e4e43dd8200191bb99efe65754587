@@ -1,0 +1,51 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.net.ssl.SSLSocket;
+
+class FileSend extends Thread {
+    BufferedReader fis;
+	PrintWriter writer; 
+
+    String filename;
+    String sendFile;
+    public FileSend(SSLSocket socket,String filestr1,String filestr2) {
+
+        this.filename = filestr1+"\\"+filestr2;
+        this.sendFile = filestr2;
+        try {
+			this.writer = new PrintWriter(socket.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+    }
+  
+    @Override
+    public void run() {
+        try {
+  
+            writer.println(sendFile);
+			writer.flush();//버퍼내의 데이타 밀어내기
+  
+            // 파일 내용을 읽으면서 전송
+			fis = new BufferedReader(new FileReader(filename));
+
+			int i=0; 
+			while((i=fis.read())!=-1)
+			{
+				writer.write(i);} 
+			writer.flush();
+			writer.close();
+			fis.close();
+            System.out.println("완료");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+

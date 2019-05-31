@@ -1,0 +1,39 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.Socket;
+
+class FileRecv extends Thread {
+    Socket socket;
+	BufferedWriter bw; 
+	BufferedReader in;
+    String filename;
+    public FileRecv(Socket socket,String filestr) {
+        this.socket = socket;
+        this.filename = filestr;
+    }
+  
+    @Override
+    public void run() {
+        try {
+        	in = new BufferedReader(new InputStreamReader(socket.getInputStream())); 
+            String fName = path+filename;
+  
+            bw = new BufferedWriter(new FileWriter(fName));
+            // 바이트 데이터를 전송받으면서 기록
+            int len;
+            byte[] data = new byte[8192];
+            while ((len = is.read(data)) >0) {
+
+                fos.write(data, 0, len);
+            }
+            fos.flush();
+            fos.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+

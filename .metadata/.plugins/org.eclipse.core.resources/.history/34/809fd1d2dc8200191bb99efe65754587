@@ -1,0 +1,43 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+
+import javax.net.ssl.SSLSocket;
+
+class FileRecv extends Thread {
+	SSLSocket socket	BufferedWriter bw; 
+	BufferedReader in;
+    String filename;
+    public FileRecv(SSLSocket socket,String filestr) {
+        this.socket = socket;
+        this.filename = filestr;
+    }
+  
+    @Override
+    public void run() {
+        try {
+        	in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            String path = System.getProperty("user.home") + "\\Desktop\\catHubClient\\";
+
+            String fName = path+filename;
+  
+            bw = new BufferedWriter(new FileWriter(fName));
+            // 바이트 데이터를 전송받으면서 기록
+            int i=0; 
+            while((i=in.read())!=-1)
+            { 
+            	bw.write(i); 
+            } 
+            bw.flush();
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
