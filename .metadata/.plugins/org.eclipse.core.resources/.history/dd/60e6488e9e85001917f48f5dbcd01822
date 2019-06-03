@@ -36,8 +36,8 @@ public class Client {
 
          String[] supported = clientSocket.getSupportedCipherSuites();
          clientSocket.setEnabledCipherSuites(supported);
-         clientSocket.startHandshake();
          
+         clientSocket.startHandshake();
          System.out.println("\n");
          System.out.println("    /\\     /\\");
          System.out.println("   {  `---'  }");
@@ -52,7 +52,6 @@ public class Client {
 		 System.out.println("       (__/");
 		 System.out.println();
 		 System.out.println("     Welcome to CatHub !!");
-		 System.out.println();
 		 System.out.println("  Command : pull , push , ls");
 		 System.out.println("  Very Simple File Server Service");
    		 Thread th = new ClientSend(clientSocket);

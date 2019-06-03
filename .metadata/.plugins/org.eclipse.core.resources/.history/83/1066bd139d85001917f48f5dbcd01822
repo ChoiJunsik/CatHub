@@ -31,6 +31,13 @@ public class Server {
       SSLServerSocket s = null;
       SSLSocket c = null;
 
+      try {
+		java.rmi.registry.LocateRegistry.createRegistry(1099);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
       if (args.length != 1) {
          System.out.println("Usage: Classname Port");
          System.exit(1);
@@ -41,7 +48,6 @@ public class Server {
       char keyStorePass[] = "154840".toCharArray();
       char keyPass[] = "154840".toCharArray();
       try {
-    	 java.rmi.registry.LocateRegistry.createRegistry(1099);
          RmiOpImpl remObj = new RmiOpImpl();
          java.rmi.Naming.rebind("rmi://localhost:1099/HelloRemote",remObj);
       }catch(Exception e) {

@@ -110,7 +110,6 @@ public class ServerRecv extends Thread{
 				            e.printStackTrace();
 				        }
 					}
-		            System.out.println();
 
 				}	
 				else{

@@ -36,8 +36,8 @@ public class Client {
 
          String[] supported = clientSocket.getSupportedCipherSuites();
          clientSocket.setEnabledCipherSuites(supported);
-         clientSocket.startHandshake();
          
+         clientSocket.startHandshake();
          System.out.println("\n");
          System.out.println("    /\\     /\\");
          System.out.println("   {  `---'  }");

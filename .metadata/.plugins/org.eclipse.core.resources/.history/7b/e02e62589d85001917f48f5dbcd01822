@@ -106,11 +106,11 @@ public class ServerRecv extends Thread{
 				            bos.flush();
 				            fos.close();
 				            System.out.println("  "+filename+" 을 전송받았습니다.");
+				            System.out.println();
 				        } catch (IOException e) {
 				            e.printStackTrace();
 				        }
 					}
-		            System.out.println();
 
 				}	
 				else{
