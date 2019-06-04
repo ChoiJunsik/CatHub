@@ -1,0 +1,11 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub        
+		String s = "pull file";
+		String s2  = s.substring(0,3);
+		System.out.print(s2);
+	}
+
+}

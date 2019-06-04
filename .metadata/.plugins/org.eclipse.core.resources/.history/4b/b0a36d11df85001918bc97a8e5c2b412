@@ -1,0 +1,11 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub        
+		String s = "pull file";
+		String s2  = s.substring(4);
+		System.out.print((double) len / (double)s * 100.0 + "%");
+	}
+
+}

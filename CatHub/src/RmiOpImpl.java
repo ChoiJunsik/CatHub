@@ -23,5 +23,12 @@ public class RmiOpImpl extends UnicastRemoteObject implements RmiOp{
 		}
 		return output;
 	}
+	@Override
+	public int getFileLength() throws RemoteException {
+		// TODO Auto-generated method stub
+		File dirFile=new File(path);
+		File []fileList=dirFile.listFiles();
+		return fileList.length;
+	}
 	
 }

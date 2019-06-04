@@ -38,8 +38,8 @@ public class Server {
       int sPort = Integer.parseInt(args[0]);
       String ksName = runRoot + ".keystore//SSLSocketServerKey";
       
-      char keyStorePass[] = "154840".toCharArray();
-      char keyPass[] = "154840".toCharArray();
+      char keyStorePass[] = "비번".toCharArray();
+      char keyPass[] = "비번".toCharArray();
       try {
     	 java.rmi.registry.LocateRegistry.createRegistry(1099);
          RmiOpImpl remObj = new RmiOpImpl();

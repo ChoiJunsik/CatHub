@@ -1,0 +1,11 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub        
+		int len = 1;
+		int s = 5;
+		System.out.print((double) len / (double)s * 100.0 + "%");
+	}
+
+}
