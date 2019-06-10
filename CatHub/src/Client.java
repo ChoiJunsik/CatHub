@@ -53,7 +53,7 @@ public class Client {
 		 System.out.println();
 		 System.out.println("     Welcome to CatHub !!");
 		 System.out.println();
-		 System.out.println("  Command : pull , push , ls");
+		 System.out.println("  Command : pull , push , ls , delt");
 		 System.out.println("  Very Simple File Server Service");
    		 Thread th = new ClientSend(clientSocket);
 

@@ -2,7 +2,6 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.security.KeyStore;
 
 import javax.net.ssl.KeyManagerFactory;
@@ -38,8 +37,8 @@ public class Server {
       int sPort = Integer.parseInt(args[0]);
       String ksName = runRoot + ".keystore//SSLSocketServerKey";
       
-      char keyStorePass[] = "비번".toCharArray();
-      char keyPass[] = "비번".toCharArray();
+      char keyStorePass[] = "000000".toCharArray();
+      char keyPass[] = "000000".toCharArray();
       try {
     	 java.rmi.registry.LocateRegistry.createRegistry(1099);
          RmiOpImpl remObj = new RmiOpImpl();

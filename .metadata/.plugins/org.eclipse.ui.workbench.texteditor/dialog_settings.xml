@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="진행도" key="selection"/>
+		<item value="getFile" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="getFileLengh"/>
+			<item value="getFile"/>
 			<item value="진행도"/>
 			<item value="bind"/>
 			<item value="dis"/>

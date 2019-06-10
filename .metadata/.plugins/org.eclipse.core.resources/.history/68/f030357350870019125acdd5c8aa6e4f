@@ -1,0 +1,34 @@
+import java.io.File;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;;
+
+public class RmiOpImpl extends UnicastRemoteObject implements RmiOp{
+	
+    String path = System.getProperty("user.home") + "\\Desktop\\catHubServer";
+	protected RmiOpImpl() throws RemoteException {
+		super();
+	}
+
+	private static final long serialVersionUID = 1L;
+	public String getFileList() {
+	    String output = "";
+		File dirFile=new File(path);
+		File []fileList=dirFile.listFiles();
+		for(File tempFile : fileList) {
+		  if(tempFile.isFile()) {
+		    String tempPath=tempFile.getParent();
+		    String tempFileName=tempFile.getName();
+		    output += tempPath+"\\"+tempFileName+"\r\n";
+		  }
+		}
+		return output;
+	}
+	@Override
+	public int getFileLength() throws RemoteException {
+		// TODO Auto-generated method stub
+		File dirFile=new File(path);
+		File []fileList=dirFile.listFiles();
+		return fileList.length;
+	}
+	
+}

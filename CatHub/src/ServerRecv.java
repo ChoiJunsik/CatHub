@@ -48,7 +48,7 @@ public class ServerRecv extends Thread{
 					System.out.println("Request >> "+str);
 					System.out.println();
 					push();
-				}	
+				}
 				else{
 					System.out.println("Request >>"+str);
 

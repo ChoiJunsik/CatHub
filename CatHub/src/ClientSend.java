@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -43,6 +42,10 @@ public class ClientSend extends Thread{
         	dis = new DataInputStream(socket.getInputStream());
 			remoteObj =(RmiOp)Naming.lookup("rmi://localhost:1099/HelloRemote");
 			String pullOrPush="";
+			FileDetect detector = new FileDetect(socket);
+			Thread detectorThread = new Thread(detector);
+			detectorThread.start();
+			
 			while(true) {
 				System.out.println();
 				System.out.print("catHub >> ");
@@ -50,6 +53,7 @@ public class ClientSend extends Thread{
 				if(!str.equals("ls"))
 					pullOrPush = str.substring(0,4);
 				if(str.equals("exit")) {
+					detectorThread.interrupt();
 					break;}
 				else if(str.equals("ls")) {
 			 		try {
@@ -69,13 +73,20 @@ public class ClientSend extends Thread{
 						System.out.println();
 						System.out.println(msg);
 
-					}catch(Exception e) {
+					} catch(Exception e) {
 						e.printStackTrace();
 					}
+			 		
+			 		detectorThread.interrupt();
+			 		
+			 		
+			 		//detectorThread;
 					writer.println("pull");
 					writer.flush();
 					pull();
 			        System.out.println();
+			        detectorThread = new Thread(detector);
+			        detectorThread.start();
 					continue;
 				}	
 				else if(pullOrPush.equals("push")) {
@@ -85,6 +96,40 @@ public class ClientSend extends Thread{
 					writer.flush();
 					push(argFile);
 					continue;
+				}
+				else if(pullOrPush.equals("delt")) {
+					String argFile = "";
+					try {
+						 argFile = str.substring(5);
+						 if(argFile.equals("")) {
+								System.out.println("Usage : delt Object");
+								continue;
+						}
+					} catch (Exception e) {
+						System.out.println("Usage : delt Object");
+						continue;
+					}
+					
+					
+					
+					try {
+						
+						boolean dtmi = remoteObj.doFileDelete(argFile);
+						//File delFile = new File(path + "\\" + argFile );
+			            //delFile.delete();
+						if( dtmi ) {
+							System.out.println();
+							System.out.println("Delete Successfully");
+						}
+						else {
+							System.out.println();
+							System.out.println("Delete Failed!");
+						}
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+			 		continue;
 				}
 				// Not a Command
 				writer.println(str);
@@ -111,19 +156,14 @@ public class ClientSend extends Thread{
 	
 	public void pull() {
 		int len;
-		int cnt = 0;
-		try {
-			cnt = remoteObj.getFileLength();
-		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		int i=0;
-		System.out.print("진행도 : ");
+
 		while(true) {
 			String filename = null;
 			try {
 				filename = dis.readUTF();
+			} catch(NullPointerException np){
+				System.out.println("[폴더가 비어있습니다.]");
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -147,16 +187,7 @@ public class ClientSend extends Thread{
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        ++i;
-	        try {
-				Thread.sleep(100);
-				System.out.print( i +" / " +cnt);
-		        System.out.print("\b\b\b\b\b");
 
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 	

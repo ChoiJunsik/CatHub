@@ -23,12 +23,21 @@ public class RmiOpImpl extends UnicastRemoteObject implements RmiOp{
 		}
 		return output;
 	}
-	@Override
-	public int getFileLength() throws RemoteException {
-		// TODO Auto-generated method stub
-		File dirFile=new File(path);
-		File []fileList=dirFile.listFiles();
-		return fileList.length;
+
+	
+	public boolean doFileDelete(String filename) throws RemoteException {
+		try {
+			File del = new File(path + "\\" + filename );
+            del.delete();
+			return true;
+		}
+		catch (Exception e) {
+			
+			return false;
+		}
+		
+		
+		
 	}
 	
 }
